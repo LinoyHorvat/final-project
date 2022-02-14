@@ -1,0 +1,17 @@
+.navbar-ul{
+  display: flex;
+  justify-content: space-around;
+  height: 70px;
+  background-color: lavender;
+  align-items: center;
+}
+.navbar-li{
+  text-decoration: none;
+  list-style: none;
+  cursor: pointer;
+  padding: 3px;
+}
+
+.navbar-li:hover{
+  border-bottom: 1px solid black;
+}
