@@ -48,8 +48,11 @@ const UserSchema = new mongoose.Schema({
     type: String,
     // TODO: add validator
   },
-  Description: {
+  description: {
     type: String,
   },
+  myFavoritesProfiles: {type: Array, default: [] },
+  myFavoritesApartments: {type: Array, default: [] },
+
 });
 module.exports = mongoose.model("User", UserSchema);

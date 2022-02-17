@@ -1,6 +1,8 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
+
 
 
 const minPasswordLength = 5; 
@@ -24,7 +26,7 @@ const registerUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
     // add new user
     const user = new User({name, email, password: hashedPassword});
-    await User.save();
+    await user.save();
     const token = jwt.sign({id: user._id}, process.env.JWT_SECRET); 
     // TODO: read more
     res.json({user, token});

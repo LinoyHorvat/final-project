@@ -19,10 +19,11 @@ app.use(express.static(publicPath));
 
 // routes
 
-const user = require("./routes/user");
-const authentications = require("./routes/authentications");
+const userRoute = require("./routes/user");
+const authenticationsRoutes = require("./routes/authentications");
 
-app.use("/api/users",userRoutes)
+app.use("/api/users",userRoute)
+app.use("/api/users",authenticationsRoutes)
 
 
 const PORT = process.env.PORT || 8000;
