@@ -1,5 +1,4 @@
-// import React from 'react';
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
@@ -8,10 +7,25 @@ import HomePage from "./pages/HomePage/HomePage";
 import Profiles from "./pages/Profiles/Profiles";
 import Apartments from "./pages/Apartments/Apartments";
 import Me from "./pages/Me/Me";
+import myApi from "./api/Api";
+
 
 function App() {
-  const [chosenSong, setChosenSong] = useState({});
-  useEffect(() => {}, [chosenSong]);
+  const [usersData, setUsersData] = useState([]);
+
+  
+  const getAllUsers = async () => {
+    const {data} = await myApi.get("/users");
+    setUsersData(data);
+    console.log(data);
+  }
+  
+  useEffect(() => {
+    getAllUsers();
+  }, []);
+
+
+
   return (
     <div>
       <Router>
