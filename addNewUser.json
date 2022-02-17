@@ -1,0 +1,22 @@
+// add new user -push
+// http://localhost:8000/api/users/register
+{
+  "name": "Linoy",
+  "email": "linoy@gmail.com",
+  "password": "linoy123456"
+}
+// update user -put
+// http://localhost:8000/api/users/620e5180c3567c0a6980bf64/
+{
+  "name": "Mikey",
+  "email": "mikey@gmail.com",
+  "password": "mikey123456",
+  "age": "6",
+  "gender": "male",
+  "budget": "2000"
+}
+// add profile to favorite - put
+http://localhost:8000/api/users/favoritesProfiles/620e5180c3567c0a6980bf64/
+{
+  "_id": "620e3c2e2fe44ba2185c3854"
+}
