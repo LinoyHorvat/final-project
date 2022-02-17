@@ -17,7 +17,6 @@ function App() {
   const getAllUsers = async () => {
     const {data} = await myApi.get("/users");
     setUsersData(data);
-    console.log(data);
   }
   
   useEffect(() => {
