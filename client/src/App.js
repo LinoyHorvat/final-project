@@ -30,11 +30,11 @@ function App() {
       <Router>
       <Navbar/>
         <Routes>
-          <Route path="/landing" exact element={<Authentication />} />
-          <Route path="/" exact element={<HomePage />} />
-          <Route path="/apartments" exact element={<Apartments />} />
-          <Route path="/profiles" exact element={<Profiles />} />
-          <Route path="/me" exact element={<Me />} />
+          <Route path="/landing" element={<Authentication />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/apartments" element={<Apartments />} />
+          <Route path="/profiles" element={<Profiles />} />
+          <Route path="/me" element={<Me />} />
         </Routes>
       </Router>
     </div>

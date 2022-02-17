@@ -1,7 +1,25 @@
-import React from "react";
 import "./Authentication.css";
+import myApi from "../../api/Api";
+import React, { useState, useEffect } from "react";
+
+
 
 function Authentication() {
+
+  const loginUser = async () => {
+    try{
+      const { data } = await myApi.post('/users/login', 
+      {
+        email: "linoy@gmail.com",
+        password: "linoy123456"
+      })
+      console.log(data);
+    }
+    catch(err){
+      console.log(err.response.data);
+    }
+  }
+
   return (
     <div className="authenticationPage">
       <div className="signIn">
@@ -16,7 +34,7 @@ function Authentication() {
             placeholder="Enter your password"
           />
         </div>
-        <button className="input" type="button" className="btn">
+        <button className="input" type="button" className="btn" onClick= {loginUser}>
           Submit
         </button>
       </div>
