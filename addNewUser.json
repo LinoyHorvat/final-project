@@ -1,4 +1,4 @@
-// add new user -push
+// add new user -post
 // http://localhost:8000/api/users/register
 {
   "name": "Linoy",
