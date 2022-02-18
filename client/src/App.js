@@ -9,29 +9,37 @@ import Apartments from "./pages/Apartments/Apartments";
 import Me from "./pages/Me/Me";
 import myApi from "./api/Api";
 
-
 function App() {
   const [usersData, setUsersData] = useState([]);
+  const [user, setUser] = useState(null);
 
-  
+  const getUser = async (id) => {
+    const { data } = await myApi.get(`/users/${id}`);
+    setUser(data);
+    console.log(data);
+  };
+
   const getAllUsers = async () => {
-    const {data} = await myApi.get("/users");
+    const { data } = await myApi.get("/users");
     setUsersData(data);
-  }
-  
+  };
+
   useEffect(() => {
+    // localStorage.clear();
     getAllUsers();
+    console.log(localStorage);
+    if (localStorage.userInfo) {
+      const lsData = JSON.parse(localStorage.getItem("userInfo"));
+      getUser(lsData.user._id)
+    }
   }, []);
-
-
 
   return (
     <div>
       <Router>
-      <Navbar/>
+        {user && <Navbar user={user}/>}
         <Routes>
-          <Route path="/landing" element={<Authentication />} />
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element = {user ? <HomePage /> :<Authentication />} />
           <Route path="/apartments" element={<Apartments />} />
           <Route path="/profiles" element={<Profiles />} />
           <Route path="/me" element={<Me />} />

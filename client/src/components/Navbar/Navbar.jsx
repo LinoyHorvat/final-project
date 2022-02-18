@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./Navbar.css";
 
 
-function Navbar() {
+function Navbar({user}) {
   const navigate = useNavigate();
 
   return (
@@ -20,7 +20,7 @@ function Navbar() {
             <h3 className="navbar-text">Profiles</h3>
           </li>
           <li className="navbar-li" onClick={() => navigate("/me")}>
-            <h3 className="navbar-text">Me</h3>
+            <h3 className="navbar-text">{user.name}</h3>
           </li>
         </ul>
       </nav>

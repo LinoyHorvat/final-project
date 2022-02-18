@@ -1,43 +1,24 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 function Me() {
-  const [newTask, setNewTask] = useState('')
-  const [tasksArr, setTasksArr] = useState([])
-  const [editedTask, setEditedTask] = useState('')
-
-  const handleAddNewTask = () => {
-    const newTasksArr = [...tasksArr, newTask]
-    setTasksArr(newTasksArr);
-  }
-  const handleEditTask = (index) => {
-    console.log(index);
-    let newTasksArr = [...tasksArr];
-    newTasksArr[index] = editedTask;
-    setTasksArr(newTasksArr);
-  }
-  const handleDeleteTask = (index) =>{
-    let newTasksArr = [...tasksArr];
-    newTasksArr.splice(index,1)
-    setTasksArr(newTasksArr);
-  }
+  const [user, setUser] = useState(null);
 
 
-  const showTasks = () => {
-    return tasksArr.map((task, index) => {
-      return (<div key={index}>{task}
-      <input type="text" placeholder="Enter your change" onChange={(e)=>{setEditedTask(e.target.value)}}></input>
-      <button onClick={()=> handleEditTask(index)}>save</button>
-      <button onClick={() => handleDeleteTask(index)}>delete</button>
-      </div>)
-    })
-  }
-  
+  useEffect(() => {
+    if (localStorage.userInfo) {
+      const lsData = JSON.parse(localStorage.getItem("userInfo"));
+      setUser(lsData);
+      console.log(lsData.user);
+    }
+  }, []);
+
   return (
     <div className="Me">
-    <input type="text" placeholder="Enter your task" onChange={(e)=>{setNewTask(e.target.value)}}></input>
-    <button onClick={handleAddNewTask}>Add</button>
-    {(newTask && showTasks)? showTasks():<div></div>}
+    <h1>My Profile</h1>
 
+    <h1>My Apartment</h1>
+    <h1>My Favorites Profiles</h1>
+    <h1>My Favorites Apartments</h1>
     </div>);
 }
 

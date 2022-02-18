@@ -2,40 +2,36 @@ import "./Authentication.css";
 import myApi from "../../api/Api";
 import React, { useState, useEffect } from "react";
 
-
+// TODO: hide password
+//TODO: add alerts/ errors to UI when adding incorrect data
 
 function Authentication() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const loginUser = async () => {
-    try{
-      const { data } = await myApi.post('/users/login', 
-      {
-        email: email,
-        password: password
-      })
-      console.log(data);
-    }
-    catch(err){
+    try {
+      const { data } = await myApi.post("/users/login", { email, password });
+      data && localStorage.setItem("userInfo", JSON.stringify(data));
+      console.log("data",data);
+    } catch (err) {
       console.log(err.response.data);
     }
-  }
+  };
   const createNewUser = async () => {
-    try{
-      const { data } = await myApi.post('/users/register', 
-      {
+    try {
+      const { data } = await myApi.post("/users/register", {
         name,
-        email: email,
-        password: password
-      })
+        email,
+        password,
+      });
+      data && localStorage.setItem("userInfo", JSON.stringify(data));
       console.log(data);
-    }
-    catch(err){
+    } catch (err) {
       console.log(err.response.data);
     }
-  }
+  };
 
   return (
     <div className="authenticationPage">
@@ -43,37 +39,58 @@ function Authentication() {
         <div className="heder">Sign In</div>
         <div className="inputsDiv">
           <div className="emailPassword">Email</div>
-          <input type="text" placeholder="Enter your email" onChange = {e => setEmail(e.target.value)}/>
+          <input
+            type="text"
+            placeholder="Enter your email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
           <div className="emailPassword">Password</div>
           <input
             className="input"
             type="text"
             placeholder="Enter your password"
-            onChange = {(e)=>setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button className="input" type="button" className="btn" onClick= {loginUser}>
+        <button
+          className="input"
+          type="button"
+          className="btn"
+          onClick={loginUser}>
           Submit
         </button>
       </div>
       <div className="signIn">
         <div className="heder">Create Account</div>
         <div className="inputsDiv">
-        <div className="emailPassword">Name</div>
-        <input type="text" placeholder="Enter your name" onChange = {(e)=>setName(e.target.value)}/>
+          <div className="emailPassword">Name</div>
+          <input
+            type="text"
+            placeholder="Enter your name"
+            onChange={(e) => setName(e.target.value)}
+          />
           <div className="emailPassword">Email</div>
-          <input type="text" placeholder="Enter your email" onChange = {(e)=>setEmail(e.target.value)}/>
+          <input
+            type="text"
+            placeholder="Enter your email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
           <div className="emailPassword">Password</div>
           <input
             className="input"
             type="text"
             placeholder="Enter your password"
-            onChange = {(e)=>setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button className="input" type="button" className="btn" onClick= {createNewUser}>
-        Submit
-      </button>
+        <button
+          className="input"
+          type="button"
+          className="btn"
+          onClick={createNewUser}
+        >
+          Submit
+        </button>
       </div>
     </div>
   );
