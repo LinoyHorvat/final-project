@@ -11,9 +11,11 @@
   "name": "Mikey",
   "email": "mikey@gmail.com",
   "password": "mikey123456",
-  "age": "6",
-  "gender": "male",
-  "budget": "2000"
+  "age": "35",
+  "phone": "0537876545",
+"gender": "male",
+"budget": "10000",
+"description": "Hi I'm Hila from South Korea, currently doing a design internship in Copenhagen. I am a calm and relaxed person who can appreciate both alone time with privacy but also a good socialising like cooking / wine togather."
 }
 // add profile to favorite - put
 http://localhost:8000/api/users/favoritesProfiles/620e5180c3567c0a6980bf64/

@@ -19,17 +19,10 @@ function App() {
   const getUser = async (id) => {
     const { data } = await myApi.get(`/users/${id}`);
     setUser(data);
-    console.log(data);
-  };
-
-  const getAllUsers = async () => {
-    const { data } = await myApi.get("/users");
-    setUsersData(data);
   };
 
   useEffect(() => {
     // localStorage.clear();
-    getAllUsers();
     console.log(localStorage);
     if (localStorage.userInfo) {
       const lsData = JSON.parse(localStorage.getItem("userInfo"));
@@ -38,13 +31,13 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <div className="app">
       <Router>
         {user && <Navbar user={user}/>}
         <Routes>
           <Route path="/" element = {user ? <HomePage /> :<Authentication />} />
           <Route path="/apartments" element={<Apartments />} />
-          <Route path="/profiles" element={<Profiles />} />
+          <Route path="/profiles" element={<Profiles user={user}/>} />
           <Route path="/me" element={<Me user={user}/>} />
         </Routes>
       </Router>
