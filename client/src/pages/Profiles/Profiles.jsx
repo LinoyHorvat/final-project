@@ -21,16 +21,7 @@ function Profiles() {
     return usersData.map((user) => {
       return (
         <div key={user._id}>
-          <Profile
-            name={user.name}
-            email={user.email}
-            profilePicture={user.profilePicture}
-            age={user.age}
-            gender={user.gender}
-            budget={user.budget}
-            phone={user.phone}
-            description={user.description}
-          />
+          <Profile user={user}/>
         </div>
       );
     });

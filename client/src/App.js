@@ -8,6 +8,9 @@ import Profiles from "./pages/Profiles/Profiles";
 import Apartments from "./pages/Apartments/Apartments";
 import Me from "./pages/Me/Me";
 import myApi from "./api/Api";
+import '@fontsource/roboto/300.css';
+import './app.css';
+
 
 function App() {
   const [usersData, setUsersData] = useState([]);
@@ -42,7 +45,7 @@ function App() {
           <Route path="/" element = {user ? <HomePage /> :<Authentication />} />
           <Route path="/apartments" element={<Apartments />} />
           <Route path="/profiles" element={<Profiles />} />
-          <Route path="/me" element={<Me />} />
+          <Route path="/me" element={<Me user={user}/>} />
         </Routes>
       </Router>
     </div>

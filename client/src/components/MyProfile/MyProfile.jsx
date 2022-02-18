@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
+import Profile from "../../components/Profile/Profile";
 
-function MyProfile() {
+// TODO: do i need this components?
+
+function MyProfile({user}) {
+  const {name, email, profilePicture, age, gender, budget, phone, description } = user
+  
+
   const [newTask, setNewTask] = useState('')
   const [tasksArr, setTasksArr] = useState([])
   const [editedTask, setEditedTask] = useState('')
@@ -37,7 +43,7 @@ function MyProfile() {
     <input type="text" placeholder="Enter your task" onChange={(e)=>{setNewTask(e.target.value)}}></input>
     <button onClick={handleAddNewTask}>Add</button>
     {(newTask && showTasks)? showTasks():<div></div>}
-
+    <Profile user={user} />
     </div>);
 }
 

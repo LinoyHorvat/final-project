@@ -1,6 +1,8 @@
 import React from 'react'
+import "./Profile.css";
 
-function Profile({name, email, profilePicture, age, gender, budget, phone, description}) {
+function Profile({user}) {
+  const {name, email, profilePicture, age, gender, budget, phone, description} = user
   return (
     <div className="profile-box">
     <div className="profile-details">Name: {name}</div>
@@ -11,8 +13,6 @@ function Profile({name, email, profilePicture, age, gender, budget, phone, descr
     <div className="profile-details">budget: {budget}</div>
     <div className="profile-details">phone: {phone}</div>
     <div className="profile-details">description: {description}</div>
-    <button>✅</button>
-    <button>❌</button>
     </div>
   )
 }

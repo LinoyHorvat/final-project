@@ -1,0 +1,9 @@
+.profile-box{
+  margin: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+.profile-picture {
+  height: 200px;
+}
