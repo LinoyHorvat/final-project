@@ -56,7 +56,8 @@ const getMyFavoritesProfiles = async (req, res) => {
 const addToMyFavoritesProfiles = async (req, res) => {
   const { id } = req.params;
   const profileId = req.body._id;
-  if (profileId === id) return res.status(400).send({message: "Can't add yourself to favorites"})
+  if (profileId === id)
+    return res.status(400).send({ message: "Can't add yourself to favorites" });
   try {
     const user = await User.findById(id);
     const existProfile = user.myFavoritesProfiles.find(
@@ -87,6 +88,57 @@ const deleteFromMyFavoritesProfiles = async (req, res) => {
   }
 };
 
+// get myFavoritesApartments
+const getMyFavoritesApartments = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const user = await User.findById(id);
+    console.log(user);
+    let favoritesProfiles = await user.myFavoritesApartments.map(
+      async (roomID) => {
+        return await User.findById(roomID);
+      }
+    );
+    return res.status(200).send(favoritesApartments);
+  } catch (e) {
+    res.status(500).send({ error: e.message });
+  }
+};
+
+// add room to myFavoritesApartments
+const addToMyFavoritesApartments = async (req, res) => {
+  const { id } = req.params;
+  const newRoomId = req.body._id;
+  try {
+    const user = await User.findById(id);
+    const existProfile = user.myFavoritesApartments.find(
+      (roomID) => roomID === newRoomId
+    );
+    if (!existProfile) {
+      user.myFavoritesApartments.push(newRoomId);
+      await user.save();
+    }
+    res.status(200).send(user);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
+// delete user from myFavoritesApartments
+const deleteFromMyFavoritesApartments = async (req, res) => {
+  const { id } = req.params;
+  const newRoomId = req.body._id;
+  try {
+    const user = await User.findById(id);
+    user.myFavoritesApartments.filter((roomID) => roomID != newRoomId);
+    let idx = user.myFavoritesApartments.indexOf(newRoomId);
+    if (idx !== -1) user.myFavoritesApartments.splice(idx, 1);
+    await user.save();
+    res.status(200).send(user);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
+
 module.exports = {
   getUser,
   getAllUsers,
@@ -94,4 +146,7 @@ module.exports = {
   getMyFavoritesProfiles,
   addToMyFavoritesProfiles,
   deleteFromMyFavoritesProfiles,
+  getMyFavoritesApartments,
+  addToMyFavoritesApartments,
+  deleteFromMyFavoritesApartments,
 };

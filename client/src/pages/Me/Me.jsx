@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Profile from "../../components/Profile/Profile";
+import Room from "../../components/Profile/Room";
 import ProfileForEdit from "../../components/Profile/ProfileForEdit";
 import myApi from "../../api/Api";
 import "../../components/Profile/Profile.css";
@@ -8,6 +9,7 @@ function Me() {
   const [favoritesProfiles, setFavoritesProfiles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currUser, setCurrUser] = useState(null);
+  const [favoritesApartments, setFavoritesApartments] =useState([]);
 
   const getUser = async (_id) => {
     setLoading(true);
@@ -15,6 +17,7 @@ function Me() {
     setCurrUser(data);
     setLoading(false);
     getAllFavoritesProfiles(data);
+    getAllFavoritesApartments(data);
   };
 
   useEffect(() => {
@@ -67,6 +70,54 @@ function Me() {
     getUser(currUser._id);
   };
 
+
+
+
+
+
+  const getAllFavoritesApartments = async (currUser) => {
+    const newFavoritesApartments = [];
+    await currUser.myFavoritesApartments.map(async (room_id) => {
+      try {
+        const { data } = await myApi.get(`/rooms/${room_id}`);
+        newFavoritesApartments.push(data);
+        setFavoritesApartments(newFavoritesApartments);
+        if (
+          newFavoritesApartments.length === currUser.myFavoritesApartments.length
+        ) {
+          setLoading(true);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    });
+  };
+
+  const showFavoritesApartments = () => {
+    return favoritesApartments.map((room) => {
+      return (
+        <div key={room._id} className="profile-box">
+          <Room room={room} />
+          <button
+            onClick={() => {
+              removeFromFavoritesApartments(room._id);
+            }}
+          >
+            Remove
+          </button>
+        </div>
+      );
+    });
+  };
+
+  const removeFromFavoritesApartments = async (_id) => {
+    const { data } = await myApi.put(
+      `/rooms/deleteFavoritesProfiles/${currUser._id}`,
+      { _id }
+    );
+    getUser(currUser._id);
+  };
+
   return (
     <div className="Me">
       <h1>My Profile</h1>
@@ -79,10 +130,16 @@ function Me() {
           <div>You haven't added any favorites profiles...</div>
         )}
       </div>
-      <h1>My Apartment</h1>
-      <div>You haven't added an apartment...</div>
       <h1>My Favorites Apartments</h1>
-      <div>You haven't added any favorites apartments...</div>
+      <div className = "profiles-container">
+      {loading ? (
+        showFavoritesApartments()
+      ) : (
+        <div>You haven't added any favorites apartments...</div>
+      )}
+    </div>
+    <h1>My Apartment</h1>
+    <div>You haven't add an apartment...</div>
     </div>
   );
 }

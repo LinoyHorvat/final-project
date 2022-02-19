@@ -35,11 +35,21 @@ const showRooms = () => {
       return (
         <div key={room._id} className="profile-box">
         <Room room={room} />
+        <button className="profile-btn"
+        onClick={() => {
+          addRoomToMyFavorites(room._id);
+        }}
+      >
+        Like
+      </button>
         </div>
       );
   });
 };
 
+const addRoomToMyFavorites = async (_id) => {
+  const { data } = await myApi.put(`/users/favoritesProfiles/${currUser._id}`, {_id });
+};
 
 return (
   <div className="profiles-page-container">

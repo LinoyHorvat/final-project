@@ -48,7 +48,7 @@ h1{
   /* border-bottom: rgb(58, 198, 198) 1px solid; */
 }
 
-.profile-age{
+.profile-age, .profile-price{
   border-top: rgb(58, 198, 198) 1px solid;
   color: rgba(126, 120, 120, 0.851);
 }

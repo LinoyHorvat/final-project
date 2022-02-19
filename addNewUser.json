@@ -27,6 +27,7 @@ http://localhost:8000/api/users/favoritesProfiles/620e5180c3567c0a6980bf64/
 http://localhost:8000/api/rooms/62116a409370f625cfb40059
 put
 {
+  "address": "HaArba'a Street 28, TLV",
   "price": "4000",
   "pictures": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/317363739.jpg?k=4a62a1a5d5e843d4e757fd1a5ec528ebb5a07eb960d6e111ee9d376250b17d2a&o=&hp=1",
   "phone":"050205000",

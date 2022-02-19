@@ -6,6 +6,9 @@ const {
   getMyFavoritesProfiles,
   addToMyFavoritesProfiles,
   deleteFromMyFavoritesProfiles,
+  getMyFavoritesApartments,
+  addToMyFavoritesApartments,
+  deleteFromMyFavoritesApartments,
 } = require("../controllers/users");
 
 module.exports = router;
@@ -17,3 +20,7 @@ router.put("/:id", updateUser);
 router.put("/favoritesProfiles/:id", addToMyFavoritesProfiles);
 router.put("/deleteFavoritesProfiles/:id", deleteFromMyFavoritesProfiles);
 router.get("/favoritesProfiles/:id", getMyFavoritesProfiles);
+
+router.put("/favoritesApartments/:id", addToMyFavoritesApartments);
+router.put("/deleteFavoritesApartments/:id", deleteFromMyFavoritesApartments);
+router.get("/favoritesApartments/:id", getMyFavoritesApartments);

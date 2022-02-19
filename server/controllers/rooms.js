@@ -38,9 +38,11 @@ const updateRoom = async (req, res) => {
 // add new Room
 
 const addNewRoom = async (req, res) => {
-  const { address } = req.body;
+  // const { address } = req.body;
+  const { address, pictures, Description, phone, price  } = req.body;
   try{
-    const room = new Room({address});
+    // const room = new Room({address});
+    const room = new Room({address, pictures, Description, phone, price});
     await room.save();
   }catch (err) {
     res.status(400).send(err.message);
