@@ -37,8 +37,8 @@ function App() {
         <Routes>
           <Route path="/" element = {user ? <HomePage /> :<Authentication />} />
           <Route path="/apartments" element={<Apartments />} />
-          <Route path="/profiles" element={<Profiles user={user}/>} />
-          <Route path="/me" element={<Me user={user}/>} />
+          <Route path="/profiles" element={<Profiles />} />
+          <Route path="/me" element={<Me/>} />
         </Routes>
       </Router>
     </div>

@@ -9,15 +9,17 @@ function Authentication() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isRedirect, setRedirect] = useState(false);
 
   const loginUser = async () => {
     try {
       const { data } = await myApi.post("/users/login", { email, password });
       data && localStorage.setItem("userInfo", JSON.stringify(data));
-      console.log("data",data);
+      console.log("data", data);
     } catch (err) {
       console.log(err.response.data);
     }
+    setRedirect(true);
   };
   const createNewUser = async () => {
     try {
@@ -56,7 +58,8 @@ function Authentication() {
           className="input"
           type="button"
           className="btn"
-          onClick={loginUser}>
+          onClick={loginUser}
+        >
           Submit
         </button>
       </div>
@@ -97,3 +100,6 @@ function Authentication() {
 }
 
 export default Authentication;
+
+// {isRedirect && <Redirect to="/" />}
+// import { Redirect } from "react-router-dom";

@@ -15,5 +15,5 @@ router.get("/", getAllUsers);
 router.put("/:id", updateUser);
 
 router.put("/favoritesProfiles/:id", addToMyFavoritesProfiles);
-router.put("/favoritesProfiles/:id", deleteFromMyFavoritesProfiles);
+router.put("/deleteFavoritesProfiles/:id", deleteFromMyFavoritesProfiles);
 router.get("/favoritesProfiles/:id", getMyFavoritesProfiles);

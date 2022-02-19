@@ -1,50 +1,58 @@
 import myApi from "../../api/Api";
 import React, { useState, useEffect } from "react";
 import Profile from "../../components/Profile/Profile";
+import "../../components/Profile/Profile.css";
+import ButtonUnstyled from '@mui/base/ButtonUnstyled';
+import CustomButton from "./CustomButton"
 
-function Profiles({ user }) {
+function Profiles() {
   const [usersData, setUsersData] = useState([]);
-  const [loading, setloading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [currUser, setCurrUser] = useState(null);
 
+
   const getAllUsers = async () => {
-    setloading(true);
+    setLoading(true);
     const { data } = await myApi.get("/users/");
     setUsersData(data);
-    setloading(false);
+    setLoading(false);
   };
 
-  const getUser = async () => {
-    const { data } = await myApi.get(`/users/${user._id}`);
+  const getUser = async (_id) => {
+    setLoading(true);
+    const { data } = await myApi.get(`/users/${_id}`);
     setCurrUser(data);
+    setLoading(false);
   };
   useEffect(() => {
     getAllUsers();
-    getUser();
+    if (localStorage.userInfo) {
+      const lsData = JSON.parse(localStorage.getItem("userInfo"));
+      getUser(lsData.user._id)
+    }
   }, []);
 
   const showUsers = () => {
     return usersData.map((user) => {
-      return (
-        <div key={user._id} className="profile-box">
-          <Profile user={user} />
-          <button
-            onClick={() => {
-              addProfileToMyFavoritesProfiles(user._id);
-            }}
-          >
-            🧡
-          </button>
-        </div>
-      );
+      if (user._id !== currUser._id){
+        return (
+          <div key={user._id} className="profile-box">
+            <Profile user={user} />
+            <button className="profile-btn"
+              onClick={() => {
+                addProfileToMyFavoritesProfiles(user._id);
+              }}
+            >
+              Like
+            </button>
+          </div>
+        );
+      }
     });
   };
 
   const addProfileToMyFavoritesProfiles = async (_id) => {
-    console.log(_id);
-    const { data } = await myApi.put(`/users/favoritesProfiles/${user._id}`, {
-      _id,
-    });
+    const { data } = await myApi.put(`/users/favoritesProfiles/${currUser._id}`, {_id });
   };
 
   return (
@@ -52,7 +60,7 @@ function Profiles({ user }) {
       <h1>Find your roommates</h1>
       <div className="profiles-container">
         {" "}
-        {loading ? <div>loading...</div> : showUsers()}
+        {currUser && showUsers()}
       </div>
     </div>
   );

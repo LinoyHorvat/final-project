@@ -78,6 +78,8 @@ const deleteFromMyFavoritesProfiles = async (req, res) => {
   try {
     const user = await User.findById(id);
     user.myFavoritesProfiles.filter((userID) => userID != profileId);
+    let idx = user.myFavoritesProfiles.indexOf(profileId);
+    if (idx !== -1) user.myFavoritesProfiles.splice(idx, 1);
     await user.save();
     res.status(200).send(user);
   } catch (error) {
