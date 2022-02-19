@@ -2,8 +2,7 @@ import myApi from "../../api/Api";
 import React, { useState, useEffect } from "react";
 import Profile from "../../components/Profile/Profile";
 import "../../components/Profile/Profile.css";
-import ButtonUnstyled from '@mui/base/ButtonUnstyled';
-import CustomButton from "./CustomButton"
+
 
 function Profiles() {
   const [usersData, setUsersData] = useState([]);
