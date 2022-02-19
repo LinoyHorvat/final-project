@@ -12,17 +12,13 @@ require("./db/mongoose");
 const publicPath = path.join(__dirname, "../client/build");
 app.use(express.static(publicPath));
 
-
-// app.get("/*", (req, res) => {
-//   res.sendFile(path.resolve(publicPath, "index.html"));
-// });
-
 // routes
-
 const userRoute = require("./routes/user");
+const roomRoute = require("./routes/room");
 const authenticationsRoutes = require("./routes/authentications");
 
 app.use("/api/users",userRoute)
+app.use("/api/rooms",roomRoute)
 app.use("/api/users",authenticationsRoutes)
 
 

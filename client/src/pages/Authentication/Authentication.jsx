@@ -38,7 +38,7 @@ function Authentication() {
   return (
     <div className="authenticationPage">
       <div className="signIn">
-        <div className="heder">Sign In</div>
+        <div className="heder">Log In</div>
         <div className="inputsDiv">
           <div className="emailPassword">Email</div>
           <input
@@ -49,7 +49,7 @@ function Authentication() {
           <div className="emailPassword">Password</div>
           <input
             className="input"
-            type="text"
+            type="password"
             placeholder="Enter your password"
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -81,7 +81,7 @@ function Authentication() {
           <div className="emailPassword">Password</div>
           <input
             className="input"
-            type="text"
+            type='password'
             placeholder="Enter your password"
             onChange={(e) => setPassword(e.target.value)}
           />

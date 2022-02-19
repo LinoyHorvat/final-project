@@ -87,10 +87,6 @@ const deleteFromMyFavoritesProfiles = async (req, res) => {
   }
 };
 
-// get myFavoritesApartments
-// add apartment to myFavoritesApartments
-// delete apartment from myFavoritesApartments
-
 module.exports = {
   getUser,
   getAllUsers,
