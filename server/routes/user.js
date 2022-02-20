@@ -23,4 +23,4 @@ router.get("/favoritesProfiles/:id", getMyFavoritesProfiles);
 
 router.put("/favoritesApartments/:id", addToMyFavoritesApartments);
 router.put("/deleteFavoritesApartments/:id", deleteFromMyFavoritesApartments);
-router.get("/favoritesApartments/:id", getMyFavoritesApartments);
+// router.get("/favoritesApartments/:id", getMyFavoritesApartments);

@@ -7,15 +7,16 @@ import "../../components/Profile/Profile.css";
 
 function Me() {
   const [favoritesProfiles, setFavoritesProfiles] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loadingProfile, setLoadingProfile] = useState(false);
+  const [loadingRoom, setLoadingRoom] = useState(false);
   const [currUser, setCurrUser] = useState(null);
   const [favoritesApartments, setFavoritesApartments] =useState([]);
 
   const getUser = async (_id) => {
-    setLoading(true);
+    setLoadingProfile(true);
     const { data } = await myApi.get(`/users/${_id}`);
     setCurrUser(data);
-    setLoading(false);
+    setLoadingProfile(false);
     getAllFavoritesProfiles(data);
     getAllFavoritesApartments(data);
   };
@@ -37,7 +38,7 @@ function Me() {
         if (
           newFavoritesProfiles.length === currUser.myFavoritesProfiles.length
         ) {
-          setLoading(true);
+          setLoadingProfile(true);
         }
       } catch (err) {
         console.log(err);
@@ -85,7 +86,7 @@ function Me() {
         if (
           newFavoritesApartments.length === currUser.myFavoritesApartments.length
         ) {
-          setLoading(true);
+          setLoadingRoom(true);
         }
       } catch (err) {
         console.log(err);
@@ -112,7 +113,7 @@ function Me() {
 
   const removeFromFavoritesApartments = async (_id) => {
     const { data } = await myApi.put(
-      `/rooms/deleteFavoritesProfiles/${currUser._id}`,
+      `/users/deleteFavoritesApartments/${currUser._id}`,
       { _id }
     );
     getUser(currUser._id);
@@ -124,7 +125,7 @@ function Me() {
       {currUser ? <ProfileForEdit user={currUser} /> : <div>loading...</div>}
       <h1>My Favorites Profiles</h1>
       <div className = "profiles-container">
-        {loading ? (
+        {loadingProfile ? (
           showFavoritesProfiles()
         ) : (
           <div>You haven't added any favorites profiles...</div>
@@ -132,7 +133,7 @@ function Me() {
       </div>
       <h1>My Favorites Apartments</h1>
       <div className = "profiles-container">
-      {loading ? (
+      {loadingRoom ? (
         showFavoritesApartments()
       ) : (
         <div>You haven't added any favorites apartments...</div>

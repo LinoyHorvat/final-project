@@ -48,7 +48,7 @@ const showRooms = () => {
 };
 
 const addRoomToMyFavorites = async (_id) => {
-  const { data } = await myApi.put(`/users/favoritesProfiles/${currUser._id}`, {_id });
+  const { data } = await myApi.put(`/users/favoritesApartments/${currUser._id}`, {_id });
 };
 
 return (

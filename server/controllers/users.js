@@ -127,6 +127,7 @@ const addToMyFavoritesApartments = async (req, res) => {
 const deleteFromMyFavoritesApartments = async (req, res) => {
   const { id } = req.params;
   const newRoomId = req.body._id;
+  console.log(newRoomId);
   try {
     const user = await User.findById(id);
     user.myFavoritesApartments.filter((roomID) => roomID != newRoomId);
