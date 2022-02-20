@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Profile from "../../components/Profile/Profile";
 import Room from "../../components/Profile/Room";
 import ProfileForEdit from "../../components/Profile/ProfileForEdit";
+import RoomForEdit from "../../components/Profile/RoomForEdit";
 import myApi from "../../api/Api";
 import "../../components/Profile/Profile.css";
 
@@ -10,15 +11,15 @@ function Me() {
   const [loadingProfile, setLoadingProfile] = useState(false);
   const [loadingRoom, setLoadingRoom] = useState(false);
   const [currUser, setCurrUser] = useState(null);
-  const [favoritesApartments, setFavoritesApartments] =useState([]);
+  const [favoritesApartments, setFavoritesApartments] = useState([]);
 
   const getUser = async (_id) => {
     setLoadingProfile(true);
     const { data } = await myApi.get(`/users/${_id}`);
     setCurrUser(data);
     setLoadingProfile(false);
-    getAllFavoritesProfiles(data);
     getAllFavoritesApartments(data);
+    getAllFavoritesProfiles(data);
   };
 
   useEffect(() => {
@@ -71,11 +72,6 @@ function Me() {
     getUser(currUser._id);
   };
 
-
-
-
-
-
   const getAllFavoritesApartments = async (currUser) => {
     const newFavoritesApartments = [];
     await currUser.myFavoritesApartments.map(async (room_id) => {
@@ -84,7 +80,8 @@ function Me() {
         newFavoritesApartments.push(data);
         setFavoritesApartments(newFavoritesApartments);
         if (
-          newFavoritesApartments.length === currUser.myFavoritesApartments.length
+          newFavoritesApartments.length ===
+          currUser.myFavoritesApartments.length
         ) {
           setLoadingRoom(true);
         }
@@ -124,7 +121,7 @@ function Me() {
       <h1>My Profile</h1>
       {currUser ? <ProfileForEdit user={currUser} /> : <div>loading...</div>}
       <h1>My Favorites Profiles</h1>
-      <div className = "profiles-container">
+      <div className="profiles-container">
         {loadingProfile ? (
           showFavoritesProfiles()
         ) : (
@@ -132,15 +129,15 @@ function Me() {
         )}
       </div>
       <h1>My Favorites Apartments</h1>
-      <div className = "profiles-container">
-      {loadingRoom ? (
-        showFavoritesApartments()
-      ) : (
-        <div>You haven't added any favorites apartments...</div>
-      )}
-    </div>
-    <h1>My Apartment</h1>
-    <div>You haven't add an apartment...</div>
+      <div className="profiles-container">
+        {loadingRoom ? (
+          showFavoritesApartments()
+        ) : (
+          <div>You haven't added any favorites apartments...</div>
+        )}
+      </div>
+      <h1>My Apartment</h1>
+      <div>You haven't add an apartment...</div>
     </div>
   );
 }
